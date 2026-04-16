@@ -59,7 +59,7 @@ def generate_pattern():
             z_position = row * spacing
 
             # Alternate shapes similar to checkerboard
-            if (row + col) % 2 == 0:
+            if (row + col) % 3 == 0:
         
                 object_name = cmds.polyCube(
                     name=f"cube_{row}_{col}",
@@ -69,12 +69,22 @@ def generate_pattern():
                 )[0]
             
                 y_position = 1
-        
-            else:
-            
+
+            elif (row + col) % 3 == 1:
+
                 object_name = cmds.polySphere(
                     name=f"sphere_{row}_{col}",
                     radius=1
+                )[0]
+
+                y_position = 1
+        
+            else:
+            
+                object_name = cmds.polyCylinder(
+                    name=f"cylinder_{row}_{col}",
+                    radius=1,
+                    height=2
                 )[0]
             
                 y_position = 1
