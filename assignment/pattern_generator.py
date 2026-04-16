@@ -44,51 +44,46 @@ cmds.file(new=True, force=True)
 
 
 def generate_pattern():
-    """Generate a procedural pattern of objects using nested loops.
 
-    This function should:
-        1. Define variables for rows, columns, and spacing.
-        2. Use a nested for-loop to iterate over rows and columns.
-        3. Inside the loop, use a conditional to vary object properties.
-        4. Create and position each object.
-    """
-    # --- Configuration variables ---
-    num_rows = 5        # Number of rows in the pattern.
-    num_cols = 5        # Number of columns in the pattern.
-    spacing = 3.0       # Distance between object centers.
+    # Grid settings
+    num_rows = 5
+    num_cols = 5
+    spacing = 3.0
 
-    # TODO: Create a nested loop that iterates over rows and columns.
-    #
-    # HINT -- your loop structure should look something like this:
-    #
-    #   for row in range(num_rows):
-    #       for col in range(num_cols):
-    #           # Calculate position
-    #           x_pos = col * spacing
-    #           z_pos = row * spacing
-    #
-    #           # TODO: Add a conditional here that changes something
-    #           # based on row, col, or (row + col).
-    #           # For example:
-    #           #   if (row + col) % 2 == 0:
-    #           #       create a cube
-    #           #   else:
-    #           #       create a sphere
-    #
-    #           # TODO: Create the object using cmds.polyCube(), etc.
-    #
-    #           # TODO: Position the object using cmds.move().
-    #
-    #           # TODO: (Optional) Vary the scale using cmds.scale().
+    # Create rows and Columns Of Objects
+    for row in range(num_rows):
+        for col in range(num_cols):
 
-    pass  # Remove this line once you add your code.
+            # Position each Object in the Grid
+            x_position = col * spacing
+            z_position = row * spacing
 
+            # Alternate shapes similar to checkerboard
+            if (row + col) % 2 == 0:
+        
+                object_name = cmds.polyCube(
+                    name=f"cube_{row}_{col}",
+                    width=2,
+                    height=2,
+                    depth=2
+                )[0]
+            
+                y_position = 1
+        
+            else:
+            
+                object_name = cmds.polySphere(
+                    name=f"sphere_{row}_{col}",
+                    radius=1
+                )[0]
+            
+                y_position = 1
+            
+            # Move objects into grid like Position
+            cmds.move(x_position, y_position, z_position, object_name)
 
-# ---------------------------------------------------------------------------
-# Run the generator
-# ---------------------------------------------------------------------------
+# Runs the Script/Generator
 generate_pattern()
 
-# Frame everything in the viewport.
 cmds.viewFit(allObjects=True)
-print("Pattern generated successfully!")
+print("pattern generated SUCCESSFULLY! YAY! cool...")
