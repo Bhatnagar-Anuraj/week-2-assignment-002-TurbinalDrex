@@ -69,7 +69,7 @@ def generate_pattern():
                 )[0]
             
                 y_position = 1
-
+            # Alternate between a Sphere 
             elif (row + col) % 3 == 1:
 
                 object_name = cmds.polySphere(
@@ -78,7 +78,7 @@ def generate_pattern():
                 )[0]
 
                 y_position = 1
-        
+            # Alternate between a Cylinder
             else:
             
                 object_name = cmds.polyCylinder(
